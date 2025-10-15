@@ -10,11 +10,9 @@ let movies = [
 ]
 
 const getMovie = (req, res) => {
-    const query = 'SELECT * FROM movies '
+    const query = 'SELECT * FROM movies'
     const data = db.query(query, (err, result) => {
         if (err) throw err
-        console.log(result);
-
         res.status(200).json(result)
     })
 
@@ -22,26 +20,28 @@ const getMovie = (req, res) => {
 
 const getMovieById = (req, res) => {
     const { id } = req.params
-    const movie = movies.find(movie => movie.id == id)
-
-    res.status(200).json(movie)
-}
-
-const insertNew = (req, res) => {
-    console.log(req.body.year);
-    let { title, year } = req.body
-
-    const query = `INSERT INTO movies VALUES ( ' ',${title},${year},now(),now())`
+    const query = `SELECT * FROM movies where id = ${parseInt(id)}`
     const data = db.query(query, (err, result) => {
         if (err) throw err
         console.log(result);
-
         res.status(200).json(result)
+    })
+}
+
+const insertNew = (req, res) => {
+    console.log(req.body);
+    let { title, year } = req.body
+    const query = `INSERT INTO movies (title,year,created_at,updated_at) VALUES ('${title}','${year}',now(),now())`
+    const data = db.query(query, (err, result) => {
+        if (err) throw err
+        res.status(200).json({
+            status:'OK',
+            message:'movie added!'
+        })
     })
 
     // const movie = movies.find(movie => movie.id == id)
 
-    res.status(200).json(movie)
 }
 
 module.exports = { getMovie, getMovieById, insertNew }
