@@ -16,8 +16,12 @@ app.get('/', (req, res) => {
     res.send('Welcume');
 
 })
-
 app.use('/api', route)
+app.use((err, req, res, next) => {
+    console.log(err.stack);
+    console.log("error");
+    
+})
 
 
 app.listen(port, () => {
