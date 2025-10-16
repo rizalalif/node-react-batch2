@@ -1,8 +1,15 @@
+const cors = require('cors')
 const express = require('express');
 const { route } = require('./src/routes/router');
-
+require('dotenv').config()
 const app = express()
 
+
+app.use(cors({
+    origin: process.env.CORS_ALLOW,
+    optionSuccesSatatus: 200
+}))
+app.use(express.json())
 const port = 3000
 app.use(express.json())
 app.get('/', (req, res) => {

@@ -4,9 +4,9 @@ const { HOST, USER, PASSWORD, DATABASE } = process.env
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "root",
     database: "db_movie",
-    port: 3306
+    port: 3308
 })
 
 

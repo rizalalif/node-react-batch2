@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `movies` MODIFY `created_at` DATETIME(0) NULL DEFAULT CURRENT_TIMESTAMP(0);
