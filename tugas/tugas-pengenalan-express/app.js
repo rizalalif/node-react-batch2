@@ -87,7 +87,6 @@ function findPersonById(req, res) {
     ]
 
     const founded = dataOrang.find((person) => person.id == id)
-    // console.log(founded);
     let result;
 
     if (founded == undefined) {

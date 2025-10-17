@@ -1,3 +1,4 @@
+const { db } = require('../config/db')
 const { PrismaClient } = require('./../generated/prisma')
 
 
@@ -7,20 +8,21 @@ const prisma = new PrismaClient()
 async function getMovie(req, res) {
     try {
         const { page } = req.query
-        let data = await prisma.movies.findMany()
+        let data = await prisma.movie.findMany({
+            include: {
+                category: {
+                    select: { name: true }
+                }
+            }
+        })
         if (page) {
-            data = await prisma.movies.findMany({
+            data = await prisma.movie.findMany({
                 skip: (page - 1) * 3,
                 take: 3,
             })
         }
 
         console.log(data);
-
-        // const data = await prisma.movies.findMany({
-        //     skip: (page - 1) * 3,
-        //     take: 3,
-        // })
         return res.status(200).json({
             status: "OK",
             data
@@ -38,7 +40,14 @@ async function getMovieById(req, res) {
     try {
 
         const { id } = req.params
-        const data = await prisma.movies.findFirstOrThrow({
+        const data = await prisma.movie.findFirstOrThrow({
+            include: {
+                category: {
+                    select: {
+                        name: true
+                    }
+                }
+            },
             where: {
                 id: Number(id)
             }
@@ -58,10 +67,10 @@ async function getMovieById(req, res) {
 
 async function addMovie(req, res) {
     try {
-        let { title, year } = req.body
-        const addMovie = await prisma.movies.create({
+        let { title, year, categoriesId } = req.body
+        const addMovie = await prisma.movie.create({
             data: {
-                title, year: parseInt(year)
+                title, year: parseInt(year), categoriesId
             }
         })
         return res.status(200).json({
@@ -70,6 +79,8 @@ async function addMovie(req, res) {
             data: addMovie
         })
     } catch (error) {
+        console.log(error);
+
         return res.status(400).json({
             status: 'error',
             message: 'Bad Request',
@@ -82,7 +93,7 @@ async function updateMovie(req, res) {
     try {
         let updateField = req.body
         let { id } = req.params
-        const updatedMovie = await prisma.movies.update({
+        const updatedMovie = await prisma.movie.update({
             data: updateField,
             where: {
                 id: Number(id)
@@ -107,7 +118,7 @@ async function deleteMovie(req, res) {
 
         const { id } = req.params
 
-        await prisma.movies.delete({
+        await prisma.movie.delete({
             where: { id: Number(id) }
         })
 
@@ -124,4 +135,27 @@ async function deleteMovie(req, res) {
     }
 }
 
-module.exports = { getMovie, getMovieById, addMovie, updateMovie, deleteMovie }
+async function getMovieByCategory(req, res) {
+    try {
+        const { id } = req.params
+        const data = await prisma.category.findFirstOrThrow({
+            where: {
+                id: Number(id)
+            },
+            include: { movies: true }
+        })
+        return res.status(200).json({
+            status: "OK",
+            data
+        })
+    } catch (error) {
+         return res.status(400).json({
+            status: 'error',
+            message: 'Not Found',
+        })
+
+    }
+
+}
+
+module.exports = { getMovie, getMovieById, addMovie, updateMovie, deleteMovie, getMovieByCategory }
