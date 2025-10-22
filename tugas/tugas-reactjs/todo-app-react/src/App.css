@@ -1,0 +1,133 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* APPPPPP */
+
+.container{
+  background-color: whitesmoke;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+  width: 50vh;
+  gap: 10px;
+}
+.header-form{
+  /* background-color: aqua; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  row-gap: 0;
+  border-bottom: 1px solid black;
+  /* margin-bottom: 20px; */
+  /* display: grid; */
+}
+
+.title{
+  color: grey;
+  font-weight: normal;
+  margin: 0;
+}
+
+.desc{
+  margin: 0;
+  color: black;
+  font-weight: normal;
+}
+
+
+
+label{
+  color: black;
+}
+
+
+
+.checkbox-container{
+  width: 100%;
+  /* background-color: #888; */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* align-items:safe ; */
+
+}
+
+.checkbox-container div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgb(199, 198, 198);
+  /* margin-bottom: 20px; */
+  height: 50px;
+  /* background-color: red; */
+  /* border: 1px solid black; */
+  
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.submit-btn{
+  width: 100%;
+  background-color: #0070c9;
+  /* margin: 10px; */
+}
+
+
+
+/* .checkbox-container hr{
+  width: 98%;
+  border: 1px transparent rgb(160, 17, 17) ;
+  color: grey;
+} */
