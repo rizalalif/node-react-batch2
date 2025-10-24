@@ -1,5 +1,4 @@
-const { db } = require('../config/db')
-const { PrismaClient } = require('./../generated/prisma')
+const { PrismaClient } = require('../generated/prisma')
 
 
 const prisma = new PrismaClient()
@@ -22,7 +21,6 @@ async function getMovie(req, res) {
             })
         }
 
-        console.log(data);
         return res.status(200).json({
             status: "OK",
             data
@@ -149,7 +147,7 @@ async function getMovieByCategory(req, res) {
             data
         })
     } catch (error) {
-         return res.status(400).json({
+        return res.status(400).json({
             status: 'error',
             message: 'Not Found',
         })
