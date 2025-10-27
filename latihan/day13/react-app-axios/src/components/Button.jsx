@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function Button({ label, action, id, data }) {
+export function Button({ label, action, id, data, className }) {
 
     return (
-        <button type="submit" onClick={action}>{label}</button>
+        <button className={className} type="submit" onClick={action}>{label}</button>
 
     )
 }
